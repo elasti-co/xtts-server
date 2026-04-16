@@ -5,7 +5,8 @@ LABEL org.opencontainers.image.source="https://github.com/elasti-co/xtts-server"
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
-    ffmpeg curl git build-essential && \
+    ffmpeg curl git build-essential \
+    portaudio19-dev libportaudio2 libportaudiocpp0 && \
     rm -rf /var/lib/apt/lists/*
 
 RUN pip install --no-cache-dir \
