@@ -1,0 +1,23 @@
+services:
+  xtts:
+    image: ghcr.io/elasti-co/xtts-server:latest
+    restart: unless-stopped
+    ports:
+      - "8020:8020"
+    volumes:
+      - xtts-speakers:/app/speakers
+      - xtts-models:/app/models
+      - xtts-output:/app/output
+    environment:
+      - COQUI_TOS_AGREED=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8020/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 180s
+
+volumes:
+  xtts-speakers:
+  xtts-models:
+  xtts-output:
